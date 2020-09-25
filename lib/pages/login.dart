@@ -1,4 +1,5 @@
 import 'package:clip/components/RoundedButton.dart';
+import 'package:clip/pages/main_page.dart';
 import 'package:flutter/material.dart';
 
 class Login extends StatelessWidget {
@@ -67,6 +68,9 @@ class Login extends StatelessWidget {
               height: 50,
             ),
             RoundedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, MainPage.id);
+              },
               color: Color(0xff393b44),
               text: 'Login',
             ),
@@ -74,6 +78,7 @@ class Login extends StatelessWidget {
               height: 10,
             ),
             RoundedButton(
+              onPressed: () {},
               color: Color(0xff393b44),
               text: 'Register',
             )
