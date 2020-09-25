@@ -1,4 +1,5 @@
 import 'package:clip/components/Label.dart';
+import 'package:clip/components/Tile.dart';
 import 'package:flutter/material.dart';
 
 class MainPage extends StatelessWidget {
@@ -47,7 +48,40 @@ class MainPage extends StatelessWidget {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return Dialog(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(
+                                      20.0)), //this right here
+                              child: Container(
+                                height: 200,
+                                width: 200,
+                                // color: Color(0xff322f3d),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(12.0),
+                                  child: Center(
+                                    child: Column(
+                                      children: [
+                                        Image.asset(
+                                          'images/clip_logo.png',
+                                          height: 30,
+                                          width: 30,
+                                        ),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        Text('Clip')
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            );
+                          });
+                    },
                     elevation: 5,
                     color: Colors.green,
                     child: Tooltip(
@@ -56,6 +90,26 @@ class MainPage extends StatelessWidget {
                     ),
                   )
                 ],
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Expanded(
+                child: ListView(
+                  children: [
+                    Tile(),
+                    Tile(),
+                    Tile(),
+                    Tile(),
+                    Tile(),
+                    Tile(),
+                    Tile(),
+                    Tile(),
+                    Tile(),
+                    Tile(),
+                    Tile(),
+                  ],
+                ),
               )
             ],
           ),
