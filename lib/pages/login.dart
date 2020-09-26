@@ -44,7 +44,15 @@ class Login extends StatelessWidget {
                               SizedBox(
                                 height: 10,
                               ),
-                              Text('Clip')
+                              Text('Clip'),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Text(
+                                  'Clip is a chrome extention which helps you keep track of your Job/Internship applications.'),
+                              SizedBox(
+                                height: 10,
+                              ),
                             ],
                           ),
                         ),
