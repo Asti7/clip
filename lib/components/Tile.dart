@@ -23,55 +23,57 @@ class _TileState extends State<Tile> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(18.0),
                 child: Text('Atlassian'),
               ),
-              SizedBox(
-                height: 10,
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: MaterialButton(
-                  hoverColor: Color(0xffeeeeee),
-                  onPressed: () {},
-                  child: RichText(
-                    text: TextSpan(
-                        text: 'https://balablabablbalba.com',
-                        style: TextStyle(color: Colors.blue),
-                        recognizer: TapGestureRecognizer()
-                          ..onTap = () {
-                            launch(
-                                'https://docs.flutter.io/flutter/services/UrlLauncher-class.html');
-                          }),
-                  ),
+              MaterialButton(
+                hoverColor: Color(0xffeeeeee),
+                onPressed: () {},
+                child: RichText(
+                  text: TextSpan(
+                      text: 'https://balablabablbalba.com',
+                      style: TextStyle(color: Colors.blue),
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () {
+                          launch(
+                              'https://docs.flutter.io/flutter/services/UrlLauncher-class.html');
+                        }),
                 ),
               ),
               SizedBox(
                 height: 10,
               ),
-              ToggleButtons(
-                children: [
-                  Tooltip(
-                    message: 'To Apply ',
-                    child: Icon(Icons.call_made),
-                  ),
-                  Tooltip(message: 'Applied', child: Icon(Icons.check)),
-                  Tooltip(message: 'Rejected', child: Icon(Icons.clear)),
-                  Tooltip(
-                    message: 'Accepted',
-                    child: Icon(Icons.beenhere),
-                  ),
-                ],
-                isSelected: isSelected,
-                onPressed: (int index) {
-                  setState(() {
-                    isSelected[index] = !isSelected[index];
-                  });
-                },
-                color: Colors.black,
-                selectedColor: Colors.green,
-                fillColor: Color(0xff393b44),
-                renderBorder: false,
+              Material(
+                elevation: 5,
+                shape: RoundedRectangleBorder(
+                  borderRadius:
+                      BorderRadius.only(topRight: Radius.circular(20)),
+                ),
+                color: Color(0xffeeeeee),
+                child: ToggleButtons(
+                  children: [
+                    Tooltip(
+                      message: 'To Apply ',
+                      child: Icon(Icons.call_made),
+                    ),
+                    Tooltip(message: 'Applied', child: Icon(Icons.check)),
+                    Tooltip(message: 'Rejected', child: Icon(Icons.clear)),
+                    Tooltip(
+                      message: 'Accepted',
+                      child: Icon(Icons.beenhere),
+                    ),
+                  ],
+                  isSelected: isSelected,
+                  onPressed: (int index) {
+                    setState(() {
+                      isSelected[index] = !isSelected[index];
+                    });
+                  },
+                  color: Colors.black,
+                  selectedColor: Colors.green,
+                  fillColor: Color(0xff393b44),
+                  renderBorder: false,
+                ),
               ),
             ],
           ),
