@@ -1,9 +1,5 @@
 import 'package:clip/pages/main_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_auth_buttons/flutter_auth_buttons.dart';
-import 'package:google_sign_in/google_sign_in.dart';
-
-import '../authentication.dart';
 
 class Login extends StatefulWidget {
   static const String id = 'login';
@@ -13,7 +9,8 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  bool _isProcessing = false;
+  // bool _isProcessing = false;
+  bool isSpinning = false;
 
   @override
   Widget build(BuildContext context) {
@@ -85,26 +82,17 @@ class _LoginState extends State<Login> {
             SizedBox(
               height: 50,
             ),
-            GoogleSignInButton(
-              onPressed: () async {
-                setState(() {
-                  _isProcessing = true;
-                  print(_isProcessing);
-                });
-                await signInWithGoogle().then((result) {
-                  print(result);
-                  Navigator.of(context).pop();
-                  Navigator.pushNamed(context, MainPage.id);
-                }).catchError((error) {
-                  print('Registration Error: $error');
-                });
-                setState(() {
-                  _isProcessing = false;
-                  print(_isProcessing);
-                });
+            MaterialButton(
+              minWidth: 40,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(30),
+              ),
+              elevation: 5,
+              onPressed: () {
+                Navigator.pushNamed(context, MainPage.id);
               },
-              borderRadius: 10,
-              darkMode: false,
+              color: Colors.green,
+              child: Icon(Icons.arrow_forward),
             )
           ],
         ),

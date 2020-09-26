@@ -43,37 +43,54 @@ class _TileState extends State<Tile> {
               SizedBox(
                 height: 10,
               ),
-              Material(
-                elevation: 5,
-                shape: RoundedRectangleBorder(
-                  borderRadius:
-                      BorderRadius.only(topRight: Radius.circular(20)),
-                ),
-                color: Color(0xffeeeeee),
-                child: ToggleButtons(
-                  children: [
-                    Tooltip(
-                      message: 'To Apply ',
-                      child: Icon(Icons.call_made),
+              Row(
+                children: [
+                  Material(
+                    elevation: 5,
+                    shape: RoundedRectangleBorder(
+                      borderRadius:
+                          BorderRadius.only(topRight: Radius.circular(20)),
                     ),
-                    Tooltip(message: 'Applied', child: Icon(Icons.check)),
-                    Tooltip(message: 'Rejected', child: Icon(Icons.clear)),
-                    Tooltip(
-                      message: 'Accepted',
-                      child: Icon(Icons.beenhere),
+                    color: Color(0xffeeeeee),
+                    child: ToggleButtons(
+                      children: [
+                        Tooltip(
+                          message: 'To Apply ',
+                          child: Icon(Icons.call_made),
+                        ),
+                        Tooltip(message: 'Applied', child: Icon(Icons.check)),
+                        Tooltip(message: 'Rejected', child: Icon(Icons.clear)),
+                        Tooltip(
+                          message: 'Accepted',
+                          child: Icon(Icons.beenhere),
+                        ),
+                      ],
+                      isSelected: isSelected,
+                      onPressed: (int index) {
+                        setState(() {
+                          isSelected[index] = !isSelected[index];
+                        });
+                      },
+                      color: Colors.black,
+                      selectedColor: Colors.green,
+                      fillColor: Color(0xff393b44),
+                      renderBorder: false,
                     ),
-                  ],
-                  isSelected: isSelected,
-                  onPressed: (int index) {
-                    setState(() {
-                      isSelected[index] = !isSelected[index];
-                    });
-                  },
-                  color: Colors.black,
-                  selectedColor: Colors.green,
-                  fillColor: Color(0xff393b44),
-                  renderBorder: false,
-                ),
+                  ),
+                  SizedBox(
+                    width: 180,
+                  ),
+                  MaterialButton(
+                    minWidth: 40,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    elevation: 5,
+                    onPressed: () {},
+                    color: Colors.red,
+                    child: Icon(Icons.delete),
+                  )
+                ],
               ),
             ],
           ),
