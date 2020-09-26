@@ -1,9 +1,19 @@
-import 'package:clip/components/RoundedButton.dart';
 import 'package:clip/pages/main_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_auth_buttons/flutter_auth_buttons.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
-class Login extends StatelessWidget {
+import '../authentication.dart';
+
+class Login extends StatefulWidget {
   static const String id = 'login';
+
+  @override
+  _LoginState createState() => _LoginState();
+}
+
+class _LoginState extends State<Login> {
+  bool _isProcessing = false;
 
   @override
   Widget build(BuildContext context) {
@@ -75,20 +85,26 @@ class Login extends StatelessWidget {
             SizedBox(
               height: 50,
             ),
-            RoundedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, MainPage.id);
+            GoogleSignInButton(
+              onPressed: () async {
+                setState(() {
+                  _isProcessing = true;
+                  print(_isProcessing);
+                });
+                await signInWithGoogle().then((result) {
+                  print(result);
+                  Navigator.of(context).pop();
+                  Navigator.pushNamed(context, MainPage.id);
+                }).catchError((error) {
+                  print('Registration Error: $error');
+                });
+                setState(() {
+                  _isProcessing = false;
+                  print(_isProcessing);
+                });
               },
-              color: Color(0xff393b44),
-              text: 'Login',
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            RoundedButton(
-              onPressed: () {},
-              color: Color(0xff393b44),
-              text: 'Register',
+              borderRadius: 10,
+              darkMode: false,
             )
           ],
         ),
