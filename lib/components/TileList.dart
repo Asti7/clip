@@ -14,8 +14,24 @@ class TileList extends StatelessWidget {
             return Tile(
               title: application.title,
               link: application.link,
+              toApplyPressed: application.toApply,
+              acceptedPressed: application.accepted,
+              appliedPressed: application.applied,
+              rejectedPressed: application.rejected,
               onPressed: () {
                 applicationData.deleteApplication(application);
+              },
+              onPressedToApply: () {
+                applicationData.updateApplicationToApply(application);
+              },
+              onPressedAccepted: () {
+                applicationData.updateApplicationAccepted(application);
+              },
+              onPressedApplied: () {
+                applicationData.updateApplicationApplied(application);
+              },
+              onPressedRejected: () {
+                applicationData.updateApplicationRejected(application);
               },
             );
           },

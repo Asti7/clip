@@ -7,21 +7,31 @@ class Tile extends StatefulWidget {
   final String title;
   final String link;
   final Function onPressed;
+  final bool toApplyPressed;
+  final bool appliedPressed;
+  final bool rejectedPressed;
+  final bool acceptedPressed;
+  final Function onPressedToApply;
+  final Function onPressedApplied;
+  final Function onPressedRejected;
+  final Function onPressedAccepted;
 
-  Tile({
-    @required this.title,
-    this.link,
-    this.onPressed,
-  });
+  Tile(
+      {@required this.title,
+      this.link,
+      this.onPressed,
+      this.acceptedPressed,
+      this.appliedPressed,
+      this.rejectedPressed,
+      this.toApplyPressed,
+      this.onPressedAccepted,
+      this.onPressedApplied,
+      this.onPressedRejected,
+      this.onPressedToApply});
 
   @override
   _TileState createState() => _TileState();
 }
-
-bool toApplyPressed = false;
-bool appliedPressed = false;
-bool rejectedPressed = false;
-bool acceptedPressed = false;
 
 class _TileState extends State<Tile> {
   @override
@@ -70,12 +80,10 @@ class _TileState extends State<Tile> {
                               borderRadius: BorderRadius.circular(10),
                             ),
                             elevation: 5,
-                            onPressed: () {
-                              setState(() {
-                                toApplyPressed = !toApplyPressed;
-                              });
-                            },
-                            color: toApplyPressed ? Colors.greenAccent : null,
+                            onPressed: widget.onPressedToApply,
+                            color: widget.toApplyPressed
+                                ? Colors.greenAccent
+                                : null,
                             child: Icon(
                               Icons.call_made,
                               size: 15,
@@ -93,12 +101,10 @@ class _TileState extends State<Tile> {
                               borderRadius: BorderRadius.circular(10),
                             ),
                             elevation: 5,
-                            onPressed: () {
-                              setState(() {
-                                appliedPressed = !appliedPressed;
-                              });
-                            },
-                            color: appliedPressed ? Colors.greenAccent : null,
+                            onPressed: widget.onPressedApplied,
+                            color: widget.appliedPressed
+                                ? Colors.greenAccent
+                                : null,
                             child: Icon(
                               Icons.done,
                               size: 15,
@@ -116,12 +122,10 @@ class _TileState extends State<Tile> {
                               borderRadius: BorderRadius.circular(10),
                             ),
                             elevation: 5,
-                            onPressed: () {
-                              setState(() {
-                                rejectedPressed = !rejectedPressed;
-                              });
-                            },
-                            color: rejectedPressed ? Colors.redAccent : null,
+                            onPressed: widget.onPressedRejected,
+                            color: widget.rejectedPressed
+                                ? Colors.redAccent
+                                : null,
                             child: Icon(
                               Icons.clear,
                               size: 15,
@@ -139,12 +143,8 @@ class _TileState extends State<Tile> {
                               borderRadius: BorderRadius.circular(10),
                             ),
                             elevation: 5,
-                            onPressed: () {
-                              setState(() {
-                                acceptedPressed = !acceptedPressed;
-                              });
-                            },
-                            color: acceptedPressed ? Colors.green : null,
+                            onPressed: widget.onPressedAccepted,
+                            color: widget.acceptedPressed ? Colors.green : null,
                             child: Icon(
                               Icons.beenhere_outlined,
                               size: 15,

@@ -20,6 +20,26 @@ class ApplicationData extends ChangeNotifier {
     notifyListeners();
   }
 
+  void updateApplicationToApply(Application application) {
+    application.toggleToApply();
+    notifyListeners();
+  }
+
+  void updateApplicationApplied(Application application) {
+    application.toggleApplied();
+    notifyListeners();
+  }
+
+  void updateApplicationRejected(Application application) {
+    application.toggleRejected();
+    notifyListeners();
+  }
+
+  void updateApplicationAccepted(Application application) {
+    application.toggleAccepted();
+    notifyListeners();
+  }
+
   void deleteApplication(Application application) {
     _applications.remove(application);
     notifyListeners();
