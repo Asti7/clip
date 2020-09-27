@@ -8,14 +8,22 @@ class Tile extends StatefulWidget {
   final String link;
   final Function onPressed;
 
-  Tile({@required this.title, this.link, this.onPressed});
+  Tile({
+    @required this.title,
+    this.link,
+    this.onPressed,
+  });
+
   @override
   _TileState createState() => _TileState();
 }
 
-class _TileState extends State<Tile> {
-  List<bool> isSelected = [false, false, false, false];
+bool toApplyPressed = false;
+bool appliedPressed = false;
+bool rejectedPressed = false;
+bool acceptedPressed = false;
 
+class _TileState extends State<Tile> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -50,40 +58,104 @@ class _TileState extends State<Tile> {
               ),
               Row(
                 children: [
-                  Material(
-                    elevation: 5,
-                    shape: RoundedRectangleBorder(
-                      borderRadius:
-                          BorderRadius.only(topRight: Radius.circular(20)),
-                    ),
-                    color: Color(0xffeeeeee),
-                    child: ToggleButtons(
-                      children: [
-                        Tooltip(
-                          message: 'To Apply ',
-                          child: Icon(Icons.call_made),
+                  Row(
+                    children: [
+                      Tooltip(
+                        message: 'To apply',
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 8.0, right: 8),
+                          child: MaterialButton(
+                            minWidth: 40,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            elevation: 5,
+                            onPressed: () {
+                              setState(() {
+                                toApplyPressed = !toApplyPressed;
+                              });
+                            },
+                            color: toApplyPressed ? Colors.greenAccent : null,
+                            child: Icon(
+                              Icons.call_made,
+                              size: 15,
+                            ),
+                          ),
                         ),
-                        Tooltip(message: 'Applied', child: Icon(Icons.check)),
-                        Tooltip(message: 'Rejected', child: Icon(Icons.clear)),
-                        Tooltip(
-                          message: 'Accepted',
-                          child: Icon(Icons.beenhere),
+                      ),
+                      Tooltip(
+                        message: 'Applied',
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 8.0, right: 8),
+                          child: MaterialButton(
+                            minWidth: 40,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            elevation: 5,
+                            onPressed: () {
+                              setState(() {
+                                appliedPressed = !appliedPressed;
+                              });
+                            },
+                            color: appliedPressed ? Colors.greenAccent : null,
+                            child: Icon(
+                              Icons.done,
+                              size: 15,
+                            ),
+                          ),
                         ),
-                      ],
-                      isSelected: isSelected,
-                      onPressed: (int index) {
-                        setState(() {
-                          isSelected[index] = !isSelected[index];
-                        });
-                      },
-                      color: Colors.black,
-                      selectedColor: Colors.green,
-                      fillColor: Color(0xff393b44),
-                      renderBorder: false,
-                    ),
+                      ),
+                      Tooltip(
+                        message: 'Rejected',
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 8.0, right: 8),
+                          child: MaterialButton(
+                            minWidth: 40,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            elevation: 5,
+                            onPressed: () {
+                              setState(() {
+                                rejectedPressed = !rejectedPressed;
+                              });
+                            },
+                            color: rejectedPressed ? Colors.redAccent : null,
+                            child: Icon(
+                              Icons.clear,
+                              size: 15,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Tooltip(
+                        message: 'Accepted',
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 8.0, right: 8),
+                          child: MaterialButton(
+                            minWidth: 40,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            elevation: 5,
+                            onPressed: () {
+                              setState(() {
+                                acceptedPressed = !acceptedPressed;
+                              });
+                            },
+                            color: acceptedPressed ? Colors.green : null,
+                            child: Icon(
+                              Icons.beenhere_outlined,
+                              size: 15,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                   SizedBox(
-                    width: 180,
+                    width: 70,
                   ),
                   MaterialButton(
                     minWidth: 40,
@@ -92,7 +164,6 @@ class _TileState extends State<Tile> {
                     ),
                     elevation: 5,
                     onPressed: widget.onPressed,
-                    color: Colors.red,
                     child: Icon(Icons.delete),
                   )
                 ],

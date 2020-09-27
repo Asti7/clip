@@ -5,6 +5,7 @@ import 'package:clip/model/application_data.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class MainPage extends StatefulWidget {
   static const String id = 'main_page';
@@ -15,7 +16,6 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   TextEditingController titleController = TextEditingController();
-
   TextEditingController linkController = TextEditingController();
 
   @override

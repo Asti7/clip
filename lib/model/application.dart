@@ -4,5 +4,8 @@ class Application {
   final String title;
   final String link;
 
-  Application({@required this.title, @required this.link});
+  Application({
+    @required this.title,
+    @required this.link,
+  });
 }
