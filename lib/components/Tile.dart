@@ -1,8 +1,14 @@
+import 'package:clip/pages/main_page.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Tile extends StatefulWidget {
+  final String title;
+  final String link;
+  final Function onPressed;
+
+  Tile({@required this.title, this.link, this.onPressed});
   @override
   _TileState createState() => _TileState();
 }
@@ -24,19 +30,18 @@ class _TileState extends State<Tile> {
             children: [
               Padding(
                 padding: const EdgeInsets.all(18.0),
-                child: Text('Atlassian'),
+                child: Text(widget.title),
               ),
               MaterialButton(
                 hoverColor: Color(0xffeeeeee),
                 onPressed: () {},
                 child: RichText(
                   text: TextSpan(
-                      text: 'https://balablabablbalba.com',
+                      text: widget.link,
                       style: TextStyle(color: Colors.blue),
                       recognizer: TapGestureRecognizer()
                         ..onTap = () {
-                          launch(
-                              'https://docs.flutter.io/flutter/services/UrlLauncher-class.html');
+                          launch(widget.link);
                         }),
                 ),
               ),
@@ -86,7 +91,7 @@ class _TileState extends State<Tile> {
                       borderRadius: BorderRadius.circular(10),
                     ),
                     elevation: 5,
-                    onPressed: () {},
+                    onPressed: widget.onPressed,
                     color: Colors.red,
                     child: Icon(Icons.delete),
                   )

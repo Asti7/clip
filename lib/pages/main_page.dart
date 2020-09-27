@@ -1,10 +1,22 @@
 import 'package:clip/components/Label.dart';
 import 'package:clip/components/Tile.dart';
+import 'package:clip/components/TileList.dart';
+import 'package:clip/model/application_data.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class MainPage extends StatelessWidget {
+class MainPage extends StatefulWidget {
   static const String id = 'main_page';
+
+  @override
+  _MainPageState createState() => _MainPageState();
+}
+
+class _MainPageState extends State<MainPage> {
+  TextEditingController titleController = TextEditingController();
+
+  TextEditingController linkController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -86,6 +98,7 @@ class MainPage extends StatelessWidget {
                                             Container(
                                               width: 250,
                                               child: CupertinoTextField(
+                                                controller: titleController,
                                                 placeholder: 'Enter note/title',
                                               ),
                                             )
@@ -102,6 +115,7 @@ class MainPage extends StatelessWidget {
                                             Container(
                                               width: 250,
                                               child: CupertinoTextField(
+                                                controller: linkController,
                                                 placeholder:
                                                     'Enter relevant link(s)',
                                               ),
@@ -122,7 +136,20 @@ class MainPage extends StatelessWidget {
                                                           10)),
                                               elevation: 5,
                                               color: Colors.green,
-                                              onPressed: () {},
+                                              onPressed: () {
+                                                if (titleController.text ==
+                                                    '') {
+                                                  titleController.text = '!';
+                                                } else {
+                                                  Provider.of<ApplicationData>(
+                                                          context,
+                                                          listen: false)
+                                                      .addApplication(
+                                                          titleController.text,
+                                                          linkController.text);
+                                                  Navigator.pop(context);
+                                                }
+                                              },
                                               minWidth: 80,
                                               child: Padding(
                                                 padding:
@@ -158,12 +185,7 @@ class MainPage extends StatelessWidget {
                 height: 20,
               ),
               Expanded(
-                child: ListView.builder(
-                  itemCount: 7,
-                  itemBuilder: (BuildContext context, int index) {
-                    return Tile();
-                  },
-                ),
+                child: TileList(),
               )
             ],
           ),
