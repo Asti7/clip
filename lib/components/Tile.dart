@@ -1,15 +1,39 @@
+import 'package:clip/pages/main_page.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Tile extends StatefulWidget {
+  final String title;
+  final String link;
+  final Function onPressed;
+  final bool toApplyPressed;
+  final bool appliedPressed;
+  final bool rejectedPressed;
+  final bool acceptedPressed;
+  final Function onPressedToApply;
+  final Function onPressedApplied;
+  final Function onPressedRejected;
+  final Function onPressedAccepted;
+
+  Tile(
+      {@required this.title,
+      this.link,
+      this.onPressed,
+      this.acceptedPressed,
+      this.appliedPressed,
+      this.rejectedPressed,
+      this.toApplyPressed,
+      this.onPressedAccepted,
+      this.onPressedApplied,
+      this.onPressedRejected,
+      this.onPressedToApply});
+
   @override
   _TileState createState() => _TileState();
 }
 
 class _TileState extends State<Tile> {
-  List<bool> isSelected = [false, false, false, false];
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -24,56 +48,125 @@ class _TileState extends State<Tile> {
             children: [
               Padding(
                 padding: const EdgeInsets.all(18.0),
-                child: Text('Atlassian'),
+                child: Text(widget.title),
               ),
               MaterialButton(
                 hoverColor: Color(0xffeeeeee),
                 onPressed: () {},
                 child: RichText(
                   text: TextSpan(
-                      text: 'https://balablabablbalba.com',
+                      text: widget.link,
                       style: TextStyle(color: Colors.blue),
                       recognizer: TapGestureRecognizer()
                         ..onTap = () {
-                          launch(
-                              'https://docs.flutter.io/flutter/services/UrlLauncher-class.html');
+                          launch(widget.link);
                         }),
                 ),
               ),
               SizedBox(
                 height: 10,
               ),
-              Material(
-                elevation: 5,
-                shape: RoundedRectangleBorder(
-                  borderRadius:
-                      BorderRadius.only(topRight: Radius.circular(20)),
-                ),
-                color: Color(0xffeeeeee),
-                child: ToggleButtons(
-                  children: [
-                    Tooltip(
-                      message: 'To Apply ',
-                      child: Icon(Icons.call_made),
+              Row(
+                children: [
+                  Row(
+                    children: [
+                      Tooltip(
+                        message: 'To apply',
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 8.0, right: 8),
+                          child: MaterialButton(
+                            minWidth: 40,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            elevation: 5,
+                            onPressed: widget.onPressedToApply,
+                            color: widget.toApplyPressed
+                                ? Colors.greenAccent
+                                : null,
+                            child: Icon(
+                              Icons.call_made,
+                              size: 15,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Tooltip(
+                        message: 'Applied',
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 8.0, right: 8),
+                          child: MaterialButton(
+                            minWidth: 40,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            elevation: 5,
+                            onPressed: widget.onPressedApplied,
+                            color: widget.appliedPressed
+                                ? Colors.greenAccent
+                                : null,
+                            child: Icon(
+                              Icons.done,
+                              size: 15,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Tooltip(
+                        message: 'Rejected',
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 8.0, right: 8),
+                          child: MaterialButton(
+                            minWidth: 40,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            elevation: 5,
+                            onPressed: widget.onPressedRejected,
+                            color: widget.rejectedPressed
+                                ? Colors.redAccent
+                                : null,
+                            child: Icon(
+                              Icons.clear,
+                              size: 15,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Tooltip(
+                        message: 'Accepted',
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 8.0, right: 8),
+                          child: MaterialButton(
+                            minWidth: 40,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            elevation: 5,
+                            onPressed: widget.onPressedAccepted,
+                            color: widget.acceptedPressed ? Colors.green : null,
+                            child: Icon(
+                              Icons.beenhere_outlined,
+                              size: 15,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    width: 70,
+                  ),
+                  MaterialButton(
+                    minWidth: 40,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
                     ),
-                    Tooltip(message: 'Applied', child: Icon(Icons.check)),
-                    Tooltip(message: 'Rejected', child: Icon(Icons.clear)),
-                    Tooltip(
-                      message: 'Accepted',
-                      child: Icon(Icons.beenhere),
-                    ),
-                  ],
-                  isSelected: isSelected,
-                  onPressed: (int index) {
-                    setState(() {
-                      isSelected[index] = !isSelected[index];
-                    });
-                  },
-                  color: Colors.black,
-                  selectedColor: Colors.green,
-                  fillColor: Color(0xff393b44),
-                  renderBorder: false,
-                ),
+                    elevation: 5,
+                    onPressed: widget.onPressed,
+                    child: Icon(Icons.delete),
+                  )
+                ],
               ),
             ],
           ),
