@@ -1,6 +1,11 @@
+import 'dart:convert';
+import 'package:clip/model/application.dart';
+import 'package:clip/model/application_data.dart';
 import 'package:clip/pages/main_page.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Tile extends StatefulWidget {

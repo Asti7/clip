@@ -21,7 +21,7 @@ class _MainPageState extends State<MainPage> {
   TextEditingController titleController = TextEditingController();
   TextEditingController linkController = TextEditingController();
 
-  SharedPreferences prefs;
+  static SharedPreferences prefs;
 
   @override
   void initState() {
