@@ -181,6 +181,9 @@ class _MainPageState extends State<MainPage> {
                                                           titleController.text,
                                                           linkController.text);
                                                   saveData();
+
+                                                  titleController.text = '';
+                                                  linkController.text = '';
                                                   Navigator.pop(context);
                                                 }
                                               },
@@ -212,7 +215,21 @@ class _MainPageState extends State<MainPage> {
                       message: 'Add application',
                       child: Icon(Icons.add),
                     ),
-                  )
+                  ),
+                  RawMaterialButton(
+                      shape: CircleBorder(),
+                      elevation: 5,
+                      child: Tooltip(
+                        padding: EdgeInsets.all(8),
+                        message:
+                            'Data is stored in browser cache,\nif you clear the cache all data is lost.',
+                        child: Icon(
+                          Icons.info_sharp,
+                          color: Colors.red,
+                          size: 25,
+                        ),
+                      ),
+                      onPressed: () {}),
                 ],
               ),
               SizedBox(
