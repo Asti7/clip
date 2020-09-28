@@ -3,15 +3,14 @@ import 'package:flutter/foundation.dart';
 import 'package:clip/model/application.dart';
 
 class ApplicationData extends ChangeNotifier {
-  List<Application> _applications = [
-    // Application(title: 'Delloite', link: 'http://blabala'),
-    // Application(title: 'Google', link: 'http://blabala'),
-    // Application(title: 'BlitzM', link: 'http://blabala'),
-    // Application(title: 'Oaktree', link: 'http://blabala'),
-  ];
+  List<Application> _applications = [];
 
-  UnmodifiableListView<Application> get applications {
-    return UnmodifiableListView(_applications);
+  List<Application> get applications {
+    return _applications;
+  }
+
+  set applications(List<Application> applications) {
+    _applications = applications;
   }
 
   void addApplication(String title, String link) {

@@ -31,4 +31,23 @@ class Application {
   void toggleAccepted() {
     accepted = !accepted;
   }
+
+  Application.fromMap(Map map)
+      : this.title = map['title'],
+        this.link = map['link'],
+        this.toApply = map['toApply'],
+        this.applied = map['applied'],
+        this.accepted = map['accepted'],
+        this.rejected = map['rejected'];
+
+  Map toMap() {
+    return {
+      'title': this.title,
+      'link': this.link,
+      'toApply': this.toApply,
+      'applied': this.applied,
+      'accepted': this.accepted,
+      'rejected': this.rejected
+    };
+  }
 }

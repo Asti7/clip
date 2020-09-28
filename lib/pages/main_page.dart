@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:clip/components/Label.dart';
 import 'package:clip/components/Tile.dart';
 import 'package:clip/components/TileList.dart';
+import 'package:clip/model/application.dart';
 import 'package:clip/model/application_data.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +20,35 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   TextEditingController titleController = TextEditingController();
   TextEditingController linkController = TextEditingController();
+
+  SharedPreferences prefs;
+
+  @override
+  void initState() {
+    initSharedPreferences();
+    super.initState();
+  }
+
+  void initSharedPreferences() async {
+    prefs = await SharedPreferences.getInstance();
+    loadData();
+  }
+
+  void saveData() {
+    List<String> userList = Provider.of<ApplicationData>(context, listen: false)
+        .applications
+        .map((item) => jsonEncode(item.toMap()))
+        .toList();
+
+    prefs.setStringList('userList', userList);
+  }
+
+  void loadData() {
+    List<String> userList = prefs.getStringList('userList');
+    Provider.of<ApplicationData>(context, listen: false).applications =
+        userList.map((item) => Application.fromMap(jsonDecode(item))).toList();
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +68,7 @@ class _MainPageState extends State<MainPage> {
               ),
             ),
             onPressed: () {
+              saveData();
               Navigator.pop(context);
             }),
       ),
@@ -147,6 +180,7 @@ class _MainPageState extends State<MainPage> {
                                                       .addApplication(
                                                           titleController.text,
                                                           linkController.text);
+                                                  saveData();
                                                   Navigator.pop(context);
                                                 }
                                               },
