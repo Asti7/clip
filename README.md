@@ -9,7 +9,7 @@ I was tired of maintaining spreadsheets and using different apps for my job trac
 
 Moreover I was interested in testing [Flutter for Web](https://flutter.dev/web) and its performance. 
 
-[![Codemagic build status](https://api.codemagic.io/apps/5f717a4a70eb49545a43c1e1/5f717a4a70eb49545a43c1e0/status_badge.svg)
+![Codemagic build status](https://api.codemagic.io/apps/5f717a4a70eb49545a43c1e1/5f717a4a70eb49545a43c1e0/status_badge.svg)
 
 
 
