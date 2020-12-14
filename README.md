@@ -5,7 +5,7 @@
 
 Clip is a [Chrome extension](https://chrome.google.com/webstore/detail/clip/eogdcghnigpjcfiimlegmdhoncdbfkif) which helps in keeping track of Job/Internship applications. 
 
-I was tired of maintaining spreadsheets and using different apps for my job tracking application process and wondered if I could have a chrome extension which could be light and easy to use - so I cerated one for myself. 😃
+I was tired of maintaining spreadsheets and using different apps for my job tracking application process and wondered if I could have a lighweight and rather simple chrome extension which is easy to use - so I cerated one for myself. 😃
 
 Moreover I was interested in testing [Flutter for Web](https://flutter.dev/web) and its performance. 
 
